@@ -1,0 +1,7 @@
+### Pràctica: Target, servei i script amb systemd ###
+
+
+Crear un target propi, fer-lo default target i comprovar que accedim amb el nostre target.
+Crear un servei dintre del nostre target i comprovar que s'inicia correctament al reiniciar.
+Modificar el servei perquè executi un script amb permisos root.
+Programar un script amb el que vulguem i executar-lo manualment per veure si funciona.
