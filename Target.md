@@ -36,5 +36,77 @@ Una vegada creat l'script, li he assignat permisos d'execució mitjançant l'ord
 
 5
 <img width="542" height="25" alt="8" src="https://github.com/user-attachments/assets/ba2e6d9d-2894-4fc2-b9b4-802f2c68c9b1" />
+<img width="813" height="991" alt="7" src="https://github.com/user-attachments/assets/259a3d46-f0fc-4fe5-9031-b41b82c1a06d" />
+Abans d'integrar l'script en un servei de systemd, l'he executat manualment per comprovar-ne el funcionament. L'script genera un informe del sistema al fitxer /var/log/nick-system.log, on registra informació com la data, l'usuari d'execució, el nom de l'equip, el temps d'activitat, la memòria RAM, l'espai en disc i les adreces IP. La prova mostra que l'script s'ha executat correctament amb l'usuari root (UID 0).
 
 
+6
+<img width="566" height="329" alt="image" src="https://github.com/user-attachments/assets/6f0d4cbf-60c7-413a-ab26-721b7960c08d" />
+<img width="616" height="25" alt="image" src="https://github.com/user-attachments/assets/7ad1a174-0804-423c-91a8-796546e00b29" />
+Ara farem que systemd executi aquest script creant **nick.service**.
+I amb la seguent comanda informarem a systemd que hem creat un servei.
+
+
+7 
+<img width="640" height="71" alt="image" src="https://github.com/user-attachments/assets/c2a21d4a-8a6c-4f24-814e-20ace61a2a6e" />
+Aquesta línia és important perquè indica que:
+
+nick.target
+    ↓
+nick.service
+
+estan vinculats.
+
+<img width="596" height="263" alt="image" src="https://github.com/user-attachments/assets/1740b246-5e48-42dd-9c81-fb281340fae5" />
+
+Podem comprovar-ho amb la seguent comanda.
+He creat el servei nick.service dins de systemd i l'he configurat perquè executi l'script /usr/local/bin/nick-script.sh amb l'usuari root. El servei és de tipus oneshot, ja que l'script s'executa una vegada i finalitza. Finalment, he habilitat el servei perquè quedi vinculat a nick.target.
+
+
+8
+<img width="638" height="73" alt="image" src="https://github.com/user-attachments/assets/1c949fe3-42ec-4a44-acc6-988633a157d8" />
+<img width="638" height="376" alt="image" src="https://github.com/user-attachments/assets/8503745c-88a6-4d04-a0fe-d4358282617d" />
+<img width="642" height="63" alt="image" src="https://github.com/user-attachments/assets/0d70b479-de19-4f95-9dde-c5b098d8ebcc" />
+
+Això demostra:
+
+nick.service
+      ↓
+executa nick-script.sh
+      ↓
+crea un nou informe
+
+Abans de reiniciar el sistema, he iniciat manualment nick.service per comprovar que la seva configuració funciona correctament. El servei apareix com active (exited), ja que és de tipus oneshot: executa l'script una vegada i finalitza. També he comprovat el fitxer de registre i s'ha generat un nou informe, demostrant que el servei executa correctament l'script.
+
+
+
+9 
+<img width="413" height="49" alt="image" src="https://github.com/user-attachments/assets/013cb787-ec88-458b-ab91-8d903b335f35" />
+Una vegada comprovat manualment el funcionament del servei, he verificat que nick.target continua configurat com a target per defecte. A continuació, he reiniciat Ubuntu per comprovar si el target carrega automàticament el servei durant l'arrencada.
+
+
+10
+
+<img width="335" height="45" alt="image" src="https://github.com/user-attachments/assets/ec6b5bd6-4ad7-443d-af76-892fb9573420" />
+Això demostra que el teu target continua sent el predeterminat.
+
+
+<img width="652" height="257" alt="image" src="https://github.com/user-attachments/assets/bf751db1-5781-4b89-809d-dac6081e626f" />
+Fixa't també en l'hora que apareix al costat de Active:. Hauria de correspondre aproximadament amb l'hora de l'arrencada.
+
+
+<img width="619" height="54" alt="image" src="https://github.com/user-attachments/assets/61b9e185-9f11-482f-a1bd-79d411767020" />
+Aquesta és una prova molt clara: el nou informe s'ha creat sense que tu executessis manualment l'script.
+
+
+<img width="650" height="453" alt="image" src="https://github.com/user-attachments/assets/93ceb81e-f004-4321-9a77-90975b6781d8" />
+La data hauria de correspondre amb el reinici que acabes de fer.
+
+
+
+<img width="274" height="157" alt="image" src="https://github.com/user-attachments/assets/db7246fa-916b-40c5-af9d-b7f9221b8fea" />
+
+<img width="638" height="554" alt="image" src="https://github.com/user-attachments/assets/702bbcbe-f8a6-45ec-ba14-e9cd77240e95" />
+Després de reiniciar Ubuntu, he comprovat que nick.target continua sent el target configurat per defecte. També he verificat que nick.service s'ha iniciat automàticament i apareix com a actiu.
+
+Finalment, he comprovat el fitxer /var/log/nick-system.log. El nombre d'informes ha augmentat després del reinici i l'últim registre correspon a la nova arrencada. En aquest informe també es pot observar que l'script s'ha executat com a root (UID 0). D'aquesta manera es confirma que nick.target carrega el servei i que aquest executa automàticament l'script durant l'arrencada.
