@@ -29,6 +29,7 @@ He configurat nick.target com a target per defecte mitjançant systemctl set-def
 
 
 4
+<img width="703" height="732" alt="6" src="https://github.com/user-attachments/assets/0a094f0c-4bc8-4471-9a3d-88b72aef9b24" />
 <img width="761" height="93" alt="image" src="https://github.com/user-attachments/assets/2e30a9be-24eb-42d1-9057-6d68c45b4788" />
 Una vegada creat l'script, li he assignat permisos d'execució mitjançant l'ordre chmod +x. Posteriorment, he comprovat els permisos del fitxer amb ls -l, verificant que l'script disposa de permisos d'execució.
 
