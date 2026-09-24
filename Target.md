@@ -91,7 +91,7 @@ Podem comprovar-ho amb la seguent comanda.
 Finalment, he habilitat el servei perquè quedi vinculat a nick.target.
 
 
-PAS 8 — Provar manualment el servei
+**PAS 8 — Provar manualment el servei**
 
 <img width="638" height="73" alt="image" src="https://github.com/user-attachments/assets/1c949fe3-42ec-4a44-acc6-988633a157d8" />
 
@@ -111,14 +111,14 @@ Abans de reiniciar el sistema, he iniciat manualment nick.service per comprovar 
 
 
 
-PAS 9 — Reiniciar Ubuntu
+**PAS 9 — Reiniciar Ubuntu**
 
 <img width="413" height="49" alt="image" src="https://github.com/user-attachments/assets/013cb787-ec88-458b-ab91-8d903b335f35" />
 
 Una vegada comprovat manualment el funcionament del servei, he verificat que nick.target continua configurat com a target per defecte. A continuació, he reiniciat Ubuntu per comprovar si el target carrega automàticament el servei durant l'arrencada.
 
 
-PAS 10 — Comprovar-ho després del reinici
+**PAS 10 — Comprovar-ho després del reinici**
 
 <img width="335" height="45" alt="image" src="https://github.com/user-attachments/assets/ec6b5bd6-4ad7-443d-af76-892fb9573420" />
 
@@ -144,6 +144,5 @@ La data correspon amb el reinici que acabem de fer.
 <img width="274" height="157" alt="image" src="https://github.com/user-attachments/assets/db7246fa-916b-40c5-af9d-b7f9221b8fea" />
 
 <img width="638" height="554" alt="image" src="https://github.com/user-attachments/assets/702bbcbe-f8a6-45ec-ba14-e9cd77240e95" />
-Després de reiniciar Ubuntu, he comprovat que nick.target continua sent el target configurat per defecte. També he verificat que nick.service s'ha iniciat automàticament i apareix com a actiu.
 
 Finalment, he comprovat el fitxer /var/log/nick-system.log. El nombre d'informes ha augmentat després del reinici i l'últim registre correspon a la nova arrencada. En aquest informe també es pot observar que l'script s'ha executat com a root (UID 0). D'aquesta manera es confirma que nick.target carrega el servei i que aquest executa automàticament l'script durant l'arrencada.
