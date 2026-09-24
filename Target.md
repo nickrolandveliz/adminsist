@@ -62,14 +62,20 @@ L'script genera un informe del sistema al fitxer /var/log/nick-system.log, on re
 
 PAS 6 — Crear el servei
 
-<img width="566" height="329" alt="image" src="https://github.com/user-attachments/assets/6f0d4cbf-60c7-413a-ab26-721b7960c08d" />
-<img width="616" height="25" alt="image" src="https://github.com/user-attachments/assets/7ad1a174-0804-423c-91a8-796546e00b29" />
 Ara farem que systemd executi aquest script creant **nick.service**.
+
+<img width="616" height="25" alt="image" src="https://github.com/user-attachments/assets/7ad1a174-0804-423c-91a8-796546e00b29" />
+
+<img width="566" height="329" alt="image" src="https://github.com/user-attachments/assets/6f0d4cbf-60c7-413a-ab26-721b7960c08d" />
 I amb la seguent comanda informarem a systemd que hem creat un servei.
 
 
-7 
+PAS 7 — Habilitar el servei dintre de nick.target
+
 <img width="640" height="71" alt="image" src="https://github.com/user-attachments/assets/c2a21d4a-8a6c-4f24-814e-20ace61a2a6e" />
+
+He creat el servei nick.service dins de systemd i l'he configurat perquè executi l'script /usr/local/bin/nick-script.sh amb l'usuari root. El servei és de tipus oneshot, ja que l'script s'executa una vegada i finalitza. 
+
 Aquesta línia és important perquè indica que:
 
 nick.target
@@ -81,7 +87,7 @@ estan vinculats.
 <img width="596" height="263" alt="image" src="https://github.com/user-attachments/assets/1740b246-5e48-42dd-9c81-fb281340fae5" />
 
 Podem comprovar-ho amb la seguent comanda.
-He creat el servei nick.service dins de systemd i l'he configurat perquè executi l'script /usr/local/bin/nick-script.sh amb l'usuari root. El servei és de tipus oneshot, ja que l'script s'executa una vegada i finalitza. Finalment, he habilitat el servei perquè quedi vinculat a nick.target.
+Finalment, he habilitat el servei perquè quedi vinculat a nick.target.
 
 
 8
